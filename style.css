@@ -13,6 +13,7 @@ html, body {
 
     /* background colors */
     --bg-primary-color: #232323;
+    --bg-fill-color: #fdfdfc;
 
     /* Text colors */
     --text-primary-color: #F0F0F0;
@@ -73,4 +74,15 @@ section .informations .information {
 .board {
     border: 1px solid var(--border-primary-color);
     flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
+}
+
+.block {
+    border: 1px solid var(--border-primary-color);
+}
+
+.fill {
+    background-color: var(--bg-fill-color);
 }
