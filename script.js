@@ -9,10 +9,19 @@ const startButton = document.querySelector('.btn-start')
 const startGame = document.querySelector('.start-game')
 const gameOverModel = document.querySelector('.game-over')
 const restartButton = document.querySelector('.btn-restart')
+const highScoreElement = document.querySelector('#high-score')
+const scoreElement = document.querySelector('#score')
+const timeElement = document.querySelector('#time')
 
 let snake = [{ x: 1, y: 3 }]
+let highScore = localStorage.getItem('highScore') || 0
+highScoreElement.innerText = highScore
+
+let score = 0
+let time = `00:00`
 let direction = 'right'
 let intervalId = null
+let timeIntervalId = null
 let food = { x: Math.floor(Math.random() * rows), y: Math.floor(Math.random() * cols) }
 
 for (let row = 0; row < rows; row++) {
@@ -49,8 +58,16 @@ function render() {
 
     if (head.x === food.x && head.y === food.y) {
         blocks[`${food.x},${food.y}`].classList.remove('food')
-        snake.unshift(head)
         food = { x: Math.floor(Math.random() * rows), y: Math.floor(Math.random() * cols) }
+        blocks[`${food.x},${food.y}`].classList.add('food')
+        snake.unshift(head)
+
+        score += 10
+        scoreElement.innerText = score
+        if (score > highScore ) {
+            highScore = score
+            localStorage.setItem('highScore', highScore.toString())
+        }
     }
 
     snake.forEach(segment => {
@@ -63,15 +80,22 @@ function render() {
     })
 }
 
-// intervalId = setInterval(() => {
-//     render()
-// }, 100);
-
 startButton.addEventListener('click', () => {
     model.style.display = 'none'
     intervalId = setInterval(() => {
         render()
     }, 100);
+    timeIntervalId = setInterval(() => {
+        let [mins, secs] = time.split(':').map(Number)
+        if (secs === 59) {
+            mins += 1
+            secs = 0
+        } else {
+            secs += 1
+        }
+        time = `${mins}:${secs}`
+        timeElement.innerText = time
+    }, 1000)
 })
 
 addEventListener("keydown", (event) => {
@@ -94,8 +118,15 @@ function restartGame() {
     snake.forEach(segment => {
         blocks[`${segment.x},${segment.y}`].classList.remove('fill')
     })
+    score = 0
+    time = `00:00`
+
+    scoreElement.innerText = score
+    timeElement.innerText = time
+    highScoreElement.innerText = highScore
     model.style.display = 'none'
     snake = [{ x: 1, y: 3 }]
     food = { x: Math.floor(Math.random() * rows), y: Math.floor(Math.random() * cols) }
     intervalId = setInterval(() => { render() }, 100);
 }
+
