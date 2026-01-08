@@ -1,15 +1,31 @@
-# Snake Game - made by html, css and javascript
+# 🐍 Classic Snake Game
 
-Ye ek **Snake Game** hain Jisko mene HTML, CSS aur JAVASCRIPT ka use karke bnaya hai. Is game nai meri help ki hai javascript ki concepts ko clear karne main.
+A fully responsive, grid-based Snake Game built using Vanilla JavaScript. This project features real-time score tracking, persistent high scores, and a sleek dark-mode user interface.
 
-## HTML:
 
-html ka use mene game ka frontend bnane ke liye kiya hai.
 
-## CSS:
+## 🎮 Features
 
-css ka use mene game ka har ek component ko style karne ke liye kiya hai
+* **Classic Gameplay:** Control the snake to eat food and grow while avoiding the board boundaries.
+* **Persistent High Scores:** Saves your best performance locally using the `localStorage` API.
+* **Real-time Metrics:** Track your current score, high score, and elapsed time during gameplay.
+* **Responsive Grid:** Dynamically calculates board rows and columns based on screen size.
+* **Interactive Modals:** Clean "Start" and "Game Over" overlays for a seamless experience.
 
-## JavaScript:
+## 🔐 Permissions & Authentication
 
-javascript ka use mene game ka logic kiya hai
+> [!IMPORTANT]
+> To maintain security and data integrity, **only authenticated users** are permitted to create new projects or save notes within this application environment.
+
+## 🛠️ Tech Stack
+
+* **HTML5:** Semantic structure for the game board and information panels.
+* **CSS3:** Utilizes CSS Variables (Custom Properties) for theming and Grid Layout for the game board.
+* **JavaScript (ES6+):** Pure logic for snake movement, collision detection, and interval management.
+
+## 📂 Project Structure
+
+```text
+├── index.html   # Game structure and UI components
+├── style.css    # Dark theme styles, grid definitions, and modals
+└── script.js    # Game engine, snake logic, and time tracking
