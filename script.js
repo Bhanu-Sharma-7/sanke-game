@@ -82,9 +82,10 @@ function render() {
 
 startButton.addEventListener('click', () => {
     model.style.display = 'none'
+    let speed = document.querySelector('input[name="mode"]:checked').value === 'easy' ? 200 : 100;
     intervalId = setInterval(() => {
         render()
-    }, 100);
+    }, speed);
     timeIntervalId = setInterval(() => {
         let [mins, secs] = time.split(':').map(Number)
         if (secs === 59) {
@@ -127,7 +128,8 @@ function restartGame() {
     model.style.display = 'none'
     snake = [{ x: 1, y: 3 }]
     food = { x: Math.floor(Math.random() * rows), y: Math.floor(Math.random() * cols) }
-    intervalId = setInterval(() => { render() }, 100);
+    let speed = document.querySelector('input[name="mode"]:checked').value === 'easy' ? 200 : 100;
+    intervalId = setInterval(() => { render() }, speed);
 }
 
 let touchStartX = 0;
