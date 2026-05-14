@@ -130,3 +130,40 @@ function restartGame() {
     intervalId = setInterval(() => { render() }, 100);
 }
 
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+
+document.addEventListener('touchstart', (event) => {
+    touchStartX = event.changedTouches[0].screenX;
+    touchStartY = event.changedTouches[0].screenY;
+}, false);
+
+document.addEventListener('touchend', (event) => {
+    touchEndX = event.changedTouches[0].screenX;
+    touchEndY = event.changedTouches[0].screenY;
+    handleSwipe();
+}, false);
+
+function handleSwipe() {
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    
+    // Check if the swipe is significant enough
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 30) {
+        // Horizontal swipe
+        if (deltaX > 0 && direction !== 'left') {
+            direction = 'right';
+        } else if (deltaX < 0 && direction !== 'right') {
+            direction = 'left';
+        }
+    } else if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 30) {
+        // Vertical swipe
+        if (deltaY > 0 && direction !== 'up') {
+            direction = 'down';
+        } else if (deltaY < 0 && direction !== 'down') {
+            direction = 'up';
+        }
+    }
+}
